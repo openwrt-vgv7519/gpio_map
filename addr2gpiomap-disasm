@@ -1,0 +1,58 @@
+	OUT	IN	DIR	ALT0	ALT1	OD	PUDSEL	PUDEN
+port0	10	14	18	1c	20	24	2c	30
+port1	40	44	48	4c	50	54	5c	60
+port2	70	74	78	7c	80	84	8c	90
+port3	a0	a4	a8	ac	b0-53	b4-34	bc-38	c0-3c
+
+0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15
+0x1	0x2	0x4	0x8	0x10	0x20	0x40	0x80	0x100	0x200	0x400	0x800	0x1000	0x2000	0x4000	0x8000
+
+	f0 	f1 	f2	f3
+alt0	0	1	0	1
+alt1	0	0	1	1
+
+gpio30: https://gitorious.org/openwrt-oxnas/openwrt-oxnas/commit/8a0cd33cbc4a0f367917f1ee974543027b269ec4
+
+
+gpio03 CLOCK:vr9_gphy_gpio_init			od  dir ~alt0 ~alt1		gpio	#port0 0x8	
+gpio04 stp					od  dir  alt0 ~alt1		stp	#port0 0x10
+gpio05 stp					od  dir  alt0 ~alt1		stp	#port0 0x20
+gpio06 stp					od  dir  alt0 ~alt1		stp	#port0 0x40
+gpio11 duslic(FXS)				od  dir	~alt0 ~alt1		gpio	#port0	0x800	0x7ff	800645B8+ 
+gpio12 CoC /USB HCD			 out	od  dir ~alt0 ~alt1		gpio	#
+gpio15 ProDAAInitialize(fxo)									
+gpio20 sip_core_mwi_led_off								#port1 0x10	        8020E6A4+
+gpio21 pci				~out 	od  dir ~alt0 ~alt1		gpio	#
+gpio30 vmmc-relay	 		 out 	od  dir ~alt0 ~alt1		gpio	#port1 0x4000		800635F4+ 0xFFFFBFFF=on
+gpio32 hcd				     	od  dir ~alt0 ~alt1		gpio	#						working
+gpio37 reinjiection maybe voip related							#port2 0x20    8020ED90+
+gpio42 mdio  				     	od  dir  alt0 ~alt1		mdio	#		8001B3E4+
+gpio43 mdio				     	od  dir  alt0 ~alt1		mdio	#		8001B3E4+
+gpio47 ???                               out    od  dir ~alt0 ~alt1	        gpio    #port2 0x8000		8020DBEC+
+
+-Eth led
+gpio07 GPHY					od  dir  alt0  alt1		gphy	#port0 0x80
+gpio44 GPHY					od  dir  alt0  alt1		gphy	#port2 0x1000
+
+-buttons
+gpio09 btn-rst				 in	   ~dir ~alt0 ~alt1		gpio
+gpio10 btn-wps				 in	   ~dir ~alt0 ~alt1		gpio
+gpio41 btn-echo				 in	   ~dir ~alt0 ~alt1		gpio	#
+gpio45 btn-wlan				 in	   ~dir ~alt0 ~alt1		gpio    #port2 0x2000		8020EC24+
+
+
+
+
+3	pci	f3		req3
+7	pci	f2
+11	pci	f2
+14	pci	f2
+19	pci	f1	gnt3
+21	pci	f1
+23	pci	f2	gnt2
+24	pci	f3
+29	pci	f1		req1
+30	pci	f1	gnt1
+31	pci	f2		req2
+37	pci	f1		req4
+38	pci	f1	gnt4
